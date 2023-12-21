@@ -1,8 +1,53 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:soundpool/soundpool.dart';
 
-class XylophoneScreen extends StatelessWidget {
+class XylophoneScreen extends StatefulWidget {
   const XylophoneScreen({super.key});
+
+  @override
+  State<XylophoneScreen> createState() => _XylophoneScreenState();
+}
+
+class _XylophoneScreenState extends State<XylophoneScreen> {
+  final Soundpool _soundpool = Soundpool.fromOptions(options: SoundpoolOptions.kDefault);
+
+  final List<int> _soundIdList = [];
+
+  @override
+  void initState() {
+    _initSoundPool();
+
+    super.initState();
+  }
+
+  Future<void> _initSoundPool() async {
+    int soundId = await rootBundle.load('assets/do1.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/re.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/mi.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/pa.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/sol.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/la.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/si.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+
+    soundId = await rootBundle.load('assets/do2.wav').then((soundData) => _soundpool.load(soundData));
+    _soundIdList.add(soundId);
+  }
 
   @override
   Widget build(BuildContext context) {
